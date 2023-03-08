@@ -19,6 +19,19 @@ class ViewController: UIViewController {
         return collectionView
     }()
     
+    var fetchRequest: PHFetchResult<PHAsset>!
+    let imageManager: PHCachingImageManager = PHCachingImageManager()
+    
+    func requestCollection() {
+        let cameraRoll: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
+        
+        guard let cameraRollCollection = cameraRoll.firstObject else { return }
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        self.fetchRequest = PHAsset.fetchAssets(in: cameraRollCollection, options: fetchOptions)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "앨범"
