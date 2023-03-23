@@ -12,26 +12,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene) // SceneDelegate의 프로퍼티에 설정
-        let mainViewController = ViewController() // 맨 처음 보여줄 ViewController
-        let navigationController = UINavigationController(rootViewController: mainViewController)
-        window?.rootViewController = navigationController // RootViewController로 설정
-        window?.makeKeyAndVisible() // 윈도우에 보이게 설정
+        
+        let viewController = ViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        let appearance = UINavigationBarAppearance()
+        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        appearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold) ]
+        navigationController.navigationBar.standardAppearance = appearance
+        navigationController.navigationBar.scrollEdgeAppearance = appearance
+        navigationController.navigationBar.isTranslucent = false
+        
+        window = makeWindow(scene: scene)
+        
+        configure(
+            window: window,
+            rootViewController: navigationController
+        )
     }
+    
+}
 
-    func sceneDidDisconnect(_ scene: UIScene) {
+// MARK: - Private Function
+extension SceneDelegate {
+    private func makeWindow(scene: UIScene) -> UIWindow? {
+        guard let windowScene = (scene as? UIWindowScene) else { return nil }
+        return UIWindow(windowScene: windowScene)
     }
-
-    func sceneDidBecomeActive(_ scene: UIScene) {
-    }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-    }
-
-    func sceneWillEnterForeground(_ scene: UIScene) {
-    }
-
-    func sceneDidEnterBackground(_ scene: UIScene) {
+    
+    private func configure(
+        window: UIWindow?,
+        rootViewController: UIViewController
+    ) {
+        guard let window = window else { return }
+        window.backgroundColor = .white
+        window.overrideUserInterfaceStyle = .light
+        window.rootViewController = rootViewController
+        window.makeKeyAndVisible()
     }
 }

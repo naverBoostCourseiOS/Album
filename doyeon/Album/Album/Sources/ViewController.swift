@@ -6,18 +6,25 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
-
+    
+    // MARK: - Properties
+    
+    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        title = "앨범"
+        setupUI()
         
-        let testLabel = UILabel()
-        view.addSubview(testLabel)
-        testLabel.text = "test"
-        testLabel.translatesAutoresizingMaskIntoConstraints = false
-        testLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        testLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+}
+
+// MARK: - Methods
+extension ViewController {
+    private func setupUI() {
+        
     }
 }
