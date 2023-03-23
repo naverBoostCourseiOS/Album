@@ -9,8 +9,10 @@ import UIKit
 import SnapKit
 
 final class ViewController: UIViewController {
-    
+
     // MARK: - Properties
+    let viewModel = AlbumViewModel()
+    
     private let cellId = "cell"
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -28,6 +30,8 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         title = "앨범"
         setupUI()
+        
+        // ViewModel에 요청할 것: Album의 name, count
     }
 }
 
@@ -42,6 +46,7 @@ extension ViewController {
     private func setDelegates() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        viewModel.delegate = self
     }
     
     private func setSubviews() {
@@ -58,6 +63,8 @@ extension ViewController {
             make.edges.equalToSuperview().inset(10)
         }
     }
+    
+
 }
 
 // MARK: - UICollectionViewDelegate
@@ -74,8 +81,16 @@ extension ViewController: UICollectionViewDataSource {
     
     /// 컬렉션뷰의 지정된 위치에 표시할 셀을 요청
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // View -> Cell(얘도 뷰임) 뷰에서 뷰 모델한테 요청 데이터 전달
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         cell.backgroundColor = .gray
         return cell
+    }
+}
+
+extension ViewController: AlbumViewModelDelegate {
+    func fetchAlbumInfo() {
+        
+        //TODO: ?
     }
 }
