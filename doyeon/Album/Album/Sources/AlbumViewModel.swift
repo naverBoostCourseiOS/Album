@@ -8,12 +8,18 @@
 import Foundation
 
 protocol AlbumViewModelDelegate: AnyObject {
-    func fetchAlbumInfo()
+    func fetchAlbumInfo(albums: [Album])
 }
 
-class AlbumViewModel {
+protocol AlbumViewModelAvailable {
+    func requestAlbumsInfo()
+    
+    var delegate: AlbumViewModelDelegate? { get set }
+}
+
+class AlbumViewModel: AlbumViewModelAvailable {
     weak var delegate: AlbumViewModelDelegate?
-    var albums: [Album] = []
+    private var albums: [Album] = []
     
     init() {
         // model 갔다옴
@@ -26,8 +32,9 @@ class AlbumViewModel {
     }
     
     // View가 ViewModel한테 Request할 함수를 통해서 View한테 Data 전달
-    public func fetchAlbumInfo() {
-        delegate?.fetchAlbumInfo()
+    public func requestAlbumsInfo() {
+        //Data Flow2 Viewmodel -> response view
+        delegate?.fetchAlbumInfo(albums: albums)
     }
 
 }

@@ -9,16 +9,14 @@ import UIKit
 import SnapKit
 
 class AlbumListCell: UICollectionViewCell {
+    
+    static let identifier: String = String(describing: AlbumListCell.self)
     // MARK: - Properties
-    var albumViewModel = AlbumViewModel()
     var albumNameLabel = UILabel(frame: .zero)
     
     // MARK: - Life Cycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        albumViewModel.delegate = self
-        
         addSubview(albumNameLabel)
         
         albumNameLabel.snp.makeConstraints { make in
@@ -31,11 +29,4 @@ class AlbumListCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-}
-
-// MARK: - Methods
-extension AlbumListCell: AlbumViewModelDelegate {
-    func fetchAlbumInfo() {
-        //albumNameLabel.text = albumViewModel.albums[0].name //
-    }
 }
