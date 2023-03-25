@@ -8,28 +8,25 @@
 import Foundation
 
 protocol AlbumViewModelDelegate: AnyObject {
-    func fetchAlbumInfo()
+    func fetchAlbumInfo(_ albums: [Album])
 }
 
 class AlbumViewModel {
     weak var delegate: AlbumViewModelDelegate?
-    var albums: [Album] = []
+    private var albums: [Album] = []
     
     init() {
-        // model 갔다옴
         self.addAlbums()
     }
     
-    // view에서 접근 하면안됨
     private func addAlbums() {
         albums = dummyAlbumList
     }
     
-    // View가 ViewModel한테 Request할 함수를 통해서 View한테 Data 전달
-    public func fetchAlbumInfo() {
-        delegate?.fetchAlbumInfo()
+    func requestAlbumsData() {
+        delegate?.fetchAlbumInfo(albums)
     }
-
+    
 }
 
 // 더미데이터

@@ -12,8 +12,8 @@ final class ViewController: UIViewController {
 
     // MARK: - Properties
     let viewModel = AlbumViewModel()
+    var albums: [Album] = []
     
-    private let cellId = "cell"
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -21,7 +21,7 @@ final class ViewController: UIViewController {
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .white
-        cv.register(AlbumListCell.self, forCellWithReuseIdentifier: "cell")
+        cv.register(AlbumListCell.self, forCellWithReuseIdentifier: AlbumListCell.identifier)
         return cv
     }()
     
@@ -31,7 +31,8 @@ final class ViewController: UIViewController {
         title = "앨범"
         setupUI()
         
-        // ViewModel에 요청할 것: Album의 name, count
+        viewModel.requestAlbumsData()
+        print("Data Flow1 - view model에게 데이터 요청")
     }
 }
 
@@ -63,7 +64,6 @@ extension ViewController {
             make.edges.equalToSuperview().inset(10)
         }
     }
-    
 
 }
 
@@ -76,21 +76,21 @@ extension ViewController: UICollectionViewDelegate {
 extension ViewController: UICollectionViewDataSource {
     /// 지정된 섹션에 표시할 항목의 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return albums.count
     }
     
     /// 컬렉션뷰의 지정된 위치에 표시할 셀을 요청
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // View -> Cell(얘도 뷰임) 뷰에서 뷰 모델한테 요청 데이터 전달
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        cell.backgroundColor = .gray
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumListCell.identifier, for: indexPath) as? AlbumListCell else { return AlbumListCell() }
+        cell.LastImage.image = UIImage(named: "photo")
+        cell.albumNameLabel.text = albums[indexPath.item].name
+        cell.albumCount.text = "\(albums[indexPath.item].count)"
         return cell
     }
 }
 
 extension ViewController: AlbumViewModelDelegate {
-    func fetchAlbumInfo() {
-        
-        //TODO: ?
+    func fetchAlbumInfo(_ albums: [Album]) {
+        self.albums = albums
     }
 }
