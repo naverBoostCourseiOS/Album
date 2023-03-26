@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  AlbumListViewController.swift
 //  Album
 //
 //  Created by Doyeon on 2023/03/12.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ViewController: UIViewController {
+final class AlbumListViewController: UIViewController {
 
     // MARK: - Properties
     let viewModel = AlbumViewModel()
@@ -37,7 +37,7 @@ final class ViewController: UIViewController {
 }
 
 // MARK: - Methods
-extension ViewController {
+extension AlbumListViewController {
     private func setupUI() {
         setDelegates()
         setSubviews()
@@ -68,12 +68,12 @@ extension ViewController {
 }
 
 // MARK: - UICollectionViewDelegate
-extension ViewController: UICollectionViewDelegate {
+extension AlbumListViewController: UICollectionViewDelegate {
     
 }
 
 // MARK: - UICollectionViewDataSource
-extension ViewController: UICollectionViewDataSource {
+extension AlbumListViewController: UICollectionViewDataSource {
     /// 지정된 섹션에 표시할 항목의 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return albums.count
@@ -89,7 +89,7 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
-extension ViewController: AlbumViewModelDelegate {
+extension AlbumListViewController: AlbumViewModelDelegate {
     func fetchAlbumInfo(_ albums: [Album]) {
         self.albums = albums
     }

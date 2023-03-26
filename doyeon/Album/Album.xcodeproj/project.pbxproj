@@ -13,7 +13,7 @@
 		8F5BD53829CA9684007230BB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8F5BD53729CA9684007230BB /* SnapKit */; };
 		8FD374AE29BD9C46002A985A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD374AD29BD9C46002A985A /* AppDelegate.swift */; };
 		8FD374B029BD9C46002A985A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD374AF29BD9C46002A985A /* SceneDelegate.swift */; };
-		8FD374B229BD9C46002A985A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD374B129BD9C46002A985A /* ViewController.swift */; };
+		8FD374B229BD9C46002A985A /* AlbumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD374B129BD9C46002A985A /* AlbumListViewController.swift */; };
 		8FD374B729BD9C48002A985A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FD374B629BD9C48002A985A /* Assets.xcassets */; };
 		8FD374BA29BD9C48002A985A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FD374B829BD9C48002A985A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -25,7 +25,7 @@
 		8FD374AA29BD9C46002A985A /* Album.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Album.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FD374AD29BD9C46002A985A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FD374AF29BD9C46002A985A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8FD374B129BD9C46002A985A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8FD374B129BD9C46002A985A /* AlbumListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListViewController.swift; sourceTree = "<group>"; };
 		8FD374B629BD9C48002A985A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FD374B929BD9C48002A985A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8FD374BB29BD9C48002A985A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 		8FD374C329BD9F7E002A985A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				8FD374B129BD9C46002A985A /* ViewController.swift */,
+				8FD374B129BD9C46002A985A /* AlbumListViewController.swift */,
 				8F316DE229CBFB5B00BA7C36 /* AlbumListCell.swift */,
 				8F316E0829CC30C300BA7C36 /* Album.swift */,
 				8F316E0A29CC327100BA7C36 /* AlbumViewModel.swift */,
@@ -176,7 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F316E0B29CC327100BA7C36 /* AlbumViewModel.swift in Sources */,
-				8FD374B229BD9C46002A985A /* ViewController.swift in Sources */,
+				8FD374B229BD9C46002A985A /* AlbumListViewController.swift in Sources */,
 				8FD374AE29BD9C46002A985A /* AppDelegate.swift in Sources */,
 				8FD374B029BD9C46002A985A /* SceneDelegate.swift in Sources */,
 				8F316DE329CBFB5B00BA7C36 /* AlbumListCell.swift in Sources */,
