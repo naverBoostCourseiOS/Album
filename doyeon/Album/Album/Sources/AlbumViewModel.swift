@@ -7,13 +7,16 @@
 
 import Foundation
 
-protocol AlbumViewModelDelegate: AnyObject {
-    func fetchAlbumInfo(_ albums: [Album])
+protocol AlbumViewModel: AnyObject {
+    var items: [AlbumItemViewModel] { get }
+    
+    func loadAlbumItems()
 }
 
-class AlbumViewModel {
-    weak var delegate: AlbumViewModelDelegate?
+final class DefaultAlbumViewModel: AlbumViewModel {
+
     private var albums: [Album] = []
+    private(set) var items: [AlbumItemViewModel] = []
     
     init() {
         self.addAlbums()
@@ -23,13 +26,24 @@ class AlbumViewModel {
         albums = dummyAlbumList
     }
     
-    func requestAlbumsData() {
-        delegate?.fetchAlbumInfo(albums)
+    func loadAlbumItems() {
+        items = albums.map { .init(name: $0.name, count: $0.count) }
     }
     
 }
 
-// 더미데이터
+struct AlbumItemViewModel {
+    let name: String
+    let count: Int
+}
+
+extension AlbumItemViewModel {
+    init(album: Album) {
+        self.name = album.name
+        self.count = album.count
+    }
+}
+
 fileprivate let dummyAlbumList = [
     Album(name: "앨범 1", count: 23),
     Album(name: "앨범 2", count: 9),

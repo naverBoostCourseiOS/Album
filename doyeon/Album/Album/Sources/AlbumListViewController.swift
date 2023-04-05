@@ -11,10 +11,9 @@ import SnapKit
 final class AlbumListViewController: UIViewController {
 
     // MARK: - Properties
-    let viewModel = AlbumViewModel()
-    var albums: [Album] = []
+    private let viewModel = DefaultAlbumViewModel()
     
-    private let collectionView: UICollectionView = {
+    private let albumCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: (UIScreen.main.bounds.width / 2) - 20, height: 220)
@@ -30,9 +29,10 @@ final class AlbumListViewController: UIViewController {
         super.viewDidLoad()
         title = "앨범"
         setupUI()
-        
-        viewModel.requestAlbumsData()
-        print("Data Flow1 - view model에게 데이터 요청")
+        viewModel.loadAlbumItems()
+        DispatchQueue.main.async {
+            self.albumCollectionView.reloadData()
+        }
     }
 }
 
@@ -45,22 +45,16 @@ extension AlbumListViewController {
     }
     
     private func setDelegates() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        viewModel.delegate = self
+        albumCollectionView.delegate = self
+        albumCollectionView.dataSource = self
     }
     
     private func setSubviews() {
-        let views = [
-            collectionView
-        ]
-        views.forEach {
-            view.addSubview($0)
-        }
+        view.addSubview(albumCollectionView)
     }
     
     private func setConstraints() {
-        collectionView.snp.makeConstraints { make in
+        albumCollectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(10)
         }
     }
@@ -76,21 +70,13 @@ extension AlbumListViewController: UICollectionViewDelegate {
 extension AlbumListViewController: UICollectionViewDataSource {
     /// 지정된 섹션에 표시할 항목의 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return albums.count
+        return viewModel.items.count
     }
     
     /// 컬렉션뷰의 지정된 위치에 표시할 셀을 요청
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumListCell.identifier, for: indexPath) as? AlbumListCell else { return AlbumListCell() }
-        cell.LastImage.image = UIImage(named: "photo")
-        cell.albumNameLabel.text = albums[indexPath.item].name
-        cell.albumCount.text = "\(albums[indexPath.item].count)"
+        cell.configure(with: viewModel.items[indexPath.row])
         return cell
-    }
-}
-
-extension AlbumListViewController: AlbumViewModelDelegate {
-    func fetchAlbumInfo(_ albums: [Album]) {
-        self.albums = albums
     }
 }

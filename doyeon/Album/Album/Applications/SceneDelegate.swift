@@ -13,8 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        let viewController = ViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
+        let mainViewController = AlbumListViewController()
+        let navigationController = UINavigationController(rootViewController: mainViewController)
         let appearance = UINavigationBarAppearance()
         appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         appearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold) ]
